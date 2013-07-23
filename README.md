@@ -1,28 +1,26 @@
-stm32-robotics
-==============
+#stm32-robotics
 
 This is the template project for student semestral projects in classes MRBT
 and BROB.
 
 Author:
  
-Ing. Frantisek Burian
-Laboratory of Robotics,
-Department of Control and Instrumentation
-Faculty of electrical engineering and communication
-Brno University of Technology
+> Ing. Frantisek Burian
+> Laboratory of Robotics,
+> Department of Control and Instrumentation
+> Faculty of electrical engineering and communication
+> Brno University of Technology
 
-Èesky:
-======
+- - -
+
+# Èesky:
 
 Tento repozitáø slouží jako vzorový projekt pro vytváøení projektù v pøedmìtech
 Základy Robotiky (BROB) a Robotika (MRBT).
 
-Návod k použití:
-================
+# Návod k použití:
 
-Stažení repozitáøe
-------------------
+## Stažení repozitáøe
 
 1. Zaregistrujte se na http://www.github.com a pøihlaste se. Pro úèely postupu
    budu pøedpokládat váš login <login>.
@@ -60,14 +58,18 @@ Stažení repozitáøe
    již staèí otevøít projekt v Code::Blocks a pøekompilovat projekt, pøípadnì
    rovnou spustit ladìní.
    
-Odesílání zmìn na server
-------------------------
+## Odesílání zmìn na server
 
-Stahování zmìn ze serveru
--------------------------
+TODO
 
+## Stahování zmìn ze serveru
 
-Instalace kompilátoru
----------------------
+TODO
+
+## Instalace kompilátoru (Code::Blocks)
+
+TODO
+
+## Instalace kompilátoru (Eclipse)
 
 TODO

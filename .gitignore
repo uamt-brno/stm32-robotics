@@ -22,3 +22,4 @@
 /bin/*.list
 /bin/*.srec
 /*.ld
+/*.layout
