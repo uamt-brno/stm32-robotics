@@ -5,30 +5,34 @@ and BROB.
 
 Author:
  
-> Ing. Frantisek Burian
-> Laboratory of Robotics,
-> Department of Control and Instrumentation
-> Faculty of electrical engineering and communication
-> Brno University of Technology
+Ing. Frantisek Burian
+
+Laboratory of Robotics,
+
+Department of Control and Instrumentation
+
+Faculty of electrical engineering and communication
+
+Brno University of Technology
 
 - - -
 
-# Èesky:
+## Èesky:
 
 Tento repozitáø slouží jako vzorový projekt pro vytváøení projektù v pøedmìtech
 Základy Robotiky (BROB) a Robotika (MRBT).
 
-# Návod k použití:
+## Návod k použití:
 
-## Stažení repozitáøe
+### Stažení repozitáøe
 
 1. Zaregistrujte se na http://www.github.com a pøihlaste se. Pro úèely postupu
-   budu pøedpokládat váš login <login>.
+   budu pøedpokládat váš login &lt;login&gt;.
 
 2. Proveïte "fork" na tomto repozitáøi (ikona vpravo nahoøe), tím si vytvoøíte
    vlastní kopii, do které mùžete odesílat své zmìny a mùžete tímto zpùsobem
    též projekt odevzdat na konci semestru. 
-   Adresa bude https://github.com/<login>/stm32-robotics.git
+   Adresa bude https://github.com/&lt;login&gt;/stm32-robotics.git
 
 3. Nainstalujte aktuální verzi TortoiseGIT (ze sourceforge). Nedoporuèuji èeský
    pøeklad, protože pøi pøípadné konzultaci Vám budu radit anglickou verzí názvu.
@@ -36,12 +40,12 @@ Základy Robotiky (BROB) a Robotika (MRBT).
 4. Na disku v adresáøi, kde chcete spravovat zdrojáky kliknìte pravým tlaèítkem,
    a vyberte "Git clone"
    
-   - Do políèka URL zadejte adresu Vašeho veøejného repozitáøe - 
-       "https://github.com/<login>/stm32-robotics.git".
+   Do políèka URL zadejte adresu Vašeho veøejného repozitáøe -
+       "https://github.com/&lt;login&gt;/stm32-robotics.git".
 
-   - Do políèka Directory zadejte cestu konèící názvem složky jak chcete aby se
-     jmenovala na Vašem disku. (napø. projekt)
-     
+   Do políèka Directory zadejte cestu konèící názvem složky jak chcete aby se
+   jmenovala na Vašem disku. (napø. projekt)
+
    Vše ostatní nechte výchozí a kliknìte na OK. Nyní by se vám mìl obsah
    veøejného repozitáøe pøesunout k Vám na disk.
    
@@ -58,18 +62,18 @@ Základy Robotiky (BROB) a Robotika (MRBT).
    již staèí otevøít projekt v Code::Blocks a pøekompilovat projekt, pøípadnì
    rovnou spustit ladìní.
    
-## Odesílání zmìn na server
+### Odesílání zmìn na server
 
 TODO
 
-## Stahování zmìn ze serveru
+### Stahování zmìn ze serveru
 
 TODO
 
-## Instalace kompilátoru (Code::Blocks)
+### Instalace kompilátoru (Code::Blocks)
 
 TODO
 
-## Instalace kompilátoru (Eclipse)
+### Instalace kompilátoru (Eclipse)
 
 TODO
