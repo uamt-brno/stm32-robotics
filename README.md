@@ -77,3 +77,13 @@ TODO
 ### Instalace kompilátoru (Eclipse)
 
 TODO
+
+### Tipy pro ladìní
+
+- zásek na blocking_handler z dùvodu nìjakého FAULT. Stáhnout
+   https://github.com/Laurenceb/STM32-Logger/blob/master/jtag/armv7m-macros.gdb
+   a pak v GDB v okamžiku FAULTu
+   ``` 
+   source armv7m-macros.gdb; vecstate
+   ```
+
