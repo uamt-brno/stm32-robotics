@@ -861,6 +861,7 @@
 		<Unit filename="lib/libopencm3/scripts/data/lpc43xx/usb.yaml" />
 		<Unit filename="libopencm3-config.mk" />
 		<Unit filename="libopencm3-rules.mk" />
+		<Unit filename="scripts/fancyprint.sh" />
 		<Unit filename="src/main.c">
 			<Option compilerVar="CC" />
 		</Unit>

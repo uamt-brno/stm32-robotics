@@ -27,6 +27,8 @@ INTERMEDIATE_DIR= tmp/
 OUTPUT_DIR	= bin/
 SRC_DIR		= src/
 
+#PRINTF	= scripts/fancyprint.sh
+
 ###############################################################################
 # End of user config.
 
@@ -50,7 +52,6 @@ ifeq ($(V),1)
 endif
 
 OBJS	:= $(addprefix $(INTERMEDIATE_DIR),$(SRCS:.c=.o) $(OBJS))
-
 
 ###############################################################################
 # C flags
@@ -101,24 +102,27 @@ include libopencm3-config.mk
 ###############################################################################
 # RULES
 
+.PHONY: all
+all: images
+
 include $(OPENCM3_DIR)mk/gcc-rules.mk
 include $(OPENCM3_DIR)mk/genlink-rules.mk
 include libopencm3-rules.mk
 
-all: images
+
 
 .PHONY: images
-images: $(INTERMEDIATE_DIR) $(OUTPUT_DIR) $(OUTPUT_DIR)$(BINARY).images
+images: $(INTERMEDIATE_DEP) bin bin/$(BINARY).images
 
 .PHONY: flash
-flash: $(OUTPUT_DIR)$(BINARY).flash
+flash: bin/$(BINARY).flash
 
 .PHONY: gdb
-gdb: $(OUTPUT_DIR)$(BINARY).gdb
+gdb: bin/$(BINARY).gdb
 
 .PHONY: clean
 clean:
-	$(Q)$(RM) -rf $(OUTPUT_DIR) $(INTERMEDIATE_DIR)
+	$(Q)$(RM) -rf bin $(INTERMEDIATE_DEP)
 
 %.images: %.elf %.list %.size
 	@# empty rule
@@ -136,7 +140,7 @@ clean:
 ###############################################################################
 # Directories
 
-$(OUTPUT_DIR) $(INTERMEDIATE_DIR):
+bin $(INTERMEDIATE_DEP):
 	@$(PRINTF) "  DIR     $@\n"
 	-@mkdir	$@
 
