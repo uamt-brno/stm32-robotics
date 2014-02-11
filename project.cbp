@@ -38,7 +38,7 @@
 			</Target>
 		</Build>
 		<Unit filename="Makefile" />
-		<Unit filename="Makefile.include" />
+		<Unit filename="include/main.h" />
 		<Unit filename="lib/libopencm3/include/libopencm3/cm3/assert.h" />
 		<Unit filename="lib/libopencm3/include/libopencm3/cm3/common.h" />
 		<Unit filename="lib/libopencm3/include/libopencm3/cm3/cortex.h" />
