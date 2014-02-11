@@ -859,8 +859,50 @@
 		<Unit filename="lib/libopencm3/scripts/data/lpc43xx/sgpio.yaml" />
 		<Unit filename="lib/libopencm3/scripts/data/lpc43xx/ssp.yaml" />
 		<Unit filename="lib/libopencm3/scripts/data/lpc43xx/usb.yaml" />
+		<Unit filename="lib/libopeninsider/COPYING.LGPL3" />
+		<Unit filename="lib/libopeninsider/FILES" />
+		<Unit filename="lib/libopeninsider/HACKING" />
+		<Unit filename="lib/libopeninsider/Makefile" />
+		<Unit filename="lib/libopeninsider/Makefile.common" />
+		<Unit filename="lib/libopeninsider/README.md" />
+		<Unit filename="lib/libopeninsider/inc/insider/buffer.h" />
+		<Unit filename="lib/libopeninsider/inc/insider/insider.h" />
+		<Unit filename="lib/libopeninsider/inc/insider/memory.h" />
+		<Unit filename="lib/libopeninsider/inc/insider/packet.h" />
+		<Unit filename="lib/libopeninsider/inc/insider/protocol.h" />
+		<Unit filename="lib/libopeninsider/inc/insider/recorder.h" />
+		<Unit filename="lib/libopeninsider/inc/insider/ringbuf.h" />
+		<Unit filename="lib/libopeninsider/inc/insider/scope.h" />
+		<Unit filename="lib/libopeninsider/src/buffer.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="lib/libopeninsider/src/insider.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="lib/libopeninsider/src/memory.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="lib/libopeninsider/src/packet.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="lib/libopeninsider/src/protocol.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="lib/libopeninsider/src/recorder.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="lib/libopeninsider/src/scope.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="lib/libopeninsider/target/Makefile.stm32f4" />
+		<Unit filename="lib/libopeninsider/toolchain/Makefile.arm-gcc" />
+		<Unit filename="lib/libopeninsider/toolchain/Makefile.avr-gcc" />
+		<Unit filename="lib/libopeninsider/toolchain/Makefile.codesourcery" />
+		<Unit filename="lib/libopeninsider/toolchain/Makefile.llvm" />
 		<Unit filename="libopencm3-config.mk" />
 		<Unit filename="libopencm3-rules.mk" />
+		<Unit filename="libopeninsider-config.mk" />
+		<Unit filename="libopeninsider-rules.mk" />
 		<Unit filename="scripts/fancyprint.sh" />
 		<Unit filename="src/main.c">
 			<Option compilerVar="CC" />

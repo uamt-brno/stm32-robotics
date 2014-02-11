@@ -1,3 +1,6 @@
 [submodule "lib/libopencm3"]
 	path = lib/libopencm3
 	url = https://github.com/BuFran/libopencm3
+[submodule "lib/libopeninsider"]
+	path = lib/libopeninsider
+	url = https://github.com/OpenInsider/OpenInsider-lib.git

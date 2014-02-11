@@ -23,6 +23,7 @@ DEVICE = stm32f407vgt6
 
 # Configure directories. These should end with trailing / !
 OPENCM3_DIR	= lib/libopencm3/
+OPENINSIDER_DIR	= lib/libopeninsider/
 INTERMEDIATE_DIR= tmp/
 OUTPUT_DIR	= bin/
 SRC_DIR		= src/
@@ -94,6 +95,7 @@ include $(OPENCM3_DIR)mk/genlink-config.mk
 
 # this must be included after genlink !
 include libopencm3-config.mk
+include libopeninsider-config.mk
 
 .SUFFIXES: .elf .bin .hex .srec .list .images
 .SECONDEXPANSION:
@@ -108,6 +110,7 @@ all: images
 include $(OPENCM3_DIR)mk/gcc-rules.mk
 include $(OPENCM3_DIR)mk/genlink-rules.mk
 include libopencm3-rules.mk
+include libopeninsider-rules.mk
 
 
 

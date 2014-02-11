@@ -1,0 +1,4 @@
+$(OPENINSIDER_LIBDEP):
+	@$(PRINTF) "  MAKE    $@"
+	$(Q)$(MAKE) -C $(OPENINSIDER_DIR) TOOLCHAIN=arm-gcc TARGET=stm32f4
+
