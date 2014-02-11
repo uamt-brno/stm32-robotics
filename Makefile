@@ -1,7 +1,5 @@
 ##
-## This file is part of the libopencm3 project.
-##
-## Copyright (C) 2009 Uwe Hermann <uwe@hermann-uwe.de>
+## This file is part of the stm32-robotics project.
 ##
 ## This library is free software: you can redistribute it and/or modify
 ## it under the terms of the GNU Lesser General Public License as published by
@@ -17,9 +15,21 @@
 ## along with this library.  If not, see <http://www.gnu.org/licenses/>.
 ##
 
+# this variable should be same as the project name, instead debugging
+# will not work !
 BINARY = project
 
 DEVICE = stm32f407vgt6
+
+# Configure directories. These should end with trailing / !
+OPENCM3_DIR	= lib/libopencm3/
+INTERMEDIATE_DIR= tmp/
+OUTPUT_DIR	= bin/
+SRC_DIR		= src/
+
+
+# Append all sources in the src directory
+SRCS += $(patsubst $(SRC_DIR)%,%,$(wildcard $(SRC_DIR)*.c))
 
 include Makefile.include
 

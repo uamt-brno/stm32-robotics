@@ -19,161 +19,121 @@
 ## along with this library.  If not, see <http://www.gnu.org/licenses/>.
 ##
 
-PREFIX	?= arm-none-eabi
 
-CC		= $(PREFIX)-gcc
-LD		= $(PREFIX)-gcc
-OBJCOPY		= $(PREFIX)-objcopy
-OBJDUMP		= $(PREFIX)-objdump
-GDB		= $(PREFIX)-gdb
-FLASH		= $(shell which st-flash)
-CCDIR		= $(shell dirname $(shell which $(CC)))
+VPATH	+= src
 
-# library search paths
-LIBPATHS	:= ./lib/libopencm3 ../../../../../libopencm3 $(CCDIR)/../$(PREFIX)
-
-ifeq ($(strip $(SRCLIBDIR)),)
-
-# if user have not overriden the SRCLIBDIR, try to search for him
-SRCLIBDIR	:= $(wildcard $(LIBPATHS:=/locm3.sublime-project))
-SRCLIBDIR	:= $(firstword $(shell dirname $(SRCLIBDIR)))
-
-ifeq ($(strip $(SRCLIBDIR)),)
-$(error Cannot find libopencm3 library in the standard search paths.)
+V ?= 0
+# silent mode
+ifeq ($(V),-1)
+PRINTF = \#printf
+Q = @
 endif
+#normal mode
+ifeq ($(V),0)
+Q = @
 endif
-
+#verbose mode
 ifeq ($(V),1)
-$(info Using the $(SRCLIBDIR) directory with library!)
 endif
 
+OBJS	:= $(addprefix $(INTERMEDIATE_DIR),$(SRCS:.c=.o) $(OBJS))
 
-FP_FLAGS	?= -mfloat-abi=hard -mfpu=fpv4-sp-d16
-ARCH_FLAGS	?= -mcpu=cortex-m4 -mthumb 
 
-CFLAGS		+= -Os -g \
-		   -Wall -Wextra -Wimplicit-function-declaration \
-		   -Wredundant-decls -Wmissing-prototypes -Wstrict-prototypes \
-		   -Wundef -Wshadow -I$(SRCLIBDIR)/include -fno-common \
-		   $(ARCH_FLAGS) $(FP_FLAGS) -MD -DSTM32F4
-LDSCRIPT	?= $(BINARY).ld
-LDFLAGS		+= --static -lc -lnosys -L$(SRCLIBDIR)/lib \
-		   -T$(LDSCRIPT) -nostartfiles -Wl,--gc-sections \
-		   $(ARCH_FLAGS)  $(FP_FLAGS)
+###############################################################################
+# C flags
 
-SRCS		+= $(wildcard src/*.c)
-OBJS		+= $(SRCS:.c=.o)
+CFLAGS	+= -O0 -g
+CFLAGS	+= -Wextra -Wshadow -Wimplicit-function-declaration
+CFLAGS	+= -Wredundant-decls -Wmissing-prototypes -Wstrict-prototypes
+CFLAGS	+= -ffunction-sections -fdata-sections -ffast-math -fno-common
+#additional warnings
+CFLAGS	+= -Wmissing-declarations -Wmissing-include-dirs -Wunreachable-code
 
-GENFILES	?= src/*.o
 
-OOCD		?= openocd
-OOCD_INTERFACE	?= flossjtag
-OOCD_BOARD	?= olimex_stm32_h103
-# Black magic probe specific variables
-# Set the BMP_PORT to a serial port and then BMP is used for flashing
-BMP_PORT        ?=
+###############################################################################
+# C & C++ preprocessor common flags
 
-# Be silent per default, but 'make V=1' will show all compiler calls.
-ifneq ($(V),1)
-Q := @
-NULL := 2>/dev/null
-else
-LDFLAGS += -Wl,--print-gc-sections
-endif
+CPPFLAGS+= -MD -MP -MF $(INTERMEDIATE_DIR)$(*F).d
+CPPFLAGS+= -Wall -Wundef
+CPPFLAGS+= $(DEFS)
+#additional warnings
+CPPFLAGS+= -Winline -Winit-self -Wuninitialized -Wfloat-equal -Wcast-qual
+CPPFLAGS+= -Wcast-align -Wswitch-enum -Wswitch-default -Wformat=2
+
+###############################################################################
+# Linker flags
+
+LDFLAGS	+= --static -nostartfiles
+LDFLAGS	+= -Wl,--gc-sections
+#LDFLAGS += -Wl,--no-warn-mismatch
+
+###############################################################################
+# Linker libraries to be built with
+
+LDLIBS	+= -Wl,--start-group -lc -lgcc -lnosys -Wl,--end-group
+
+###############################################################################
+# GENERAL CONFIG
+
+include $(OPENCM3_DIR)mk/gcc-config.mk
+include $(OPENCM3_DIR)mk/genlink-config.mk
+
+# this must be included after genlink !
+include libopencm3-config.mk
 
 .SUFFIXES: .elf .bin .hex .srec .list .images
 .SECONDEXPANSION:
 .SECONDARY:
 
+###############################################################################
+# RULES
+
+include $(OPENCM3_DIR)mk/gcc-rules.mk
+include $(OPENCM3_DIR)mk/genlink-rules.mk
+include libopencm3-rules.mk
+
 all: images
 
-include $(SRCLIBDIR)/ld/Makefile.linker
+.PHONY: images
+images: $(INTERMEDIATE_DIR) $(OUTPUT_DIR) $(OUTPUT_DIR)$(BINARY).images
 
-images: bin/$(BINARY).images
-flash: $(BINARY).flash
-gdb: $(BINARY).gdb
+.PHONY: flash
+flash: $(OUTPUT_DIR)$(BINARY).flash
 
-%.images: %.bin %.hex %.srec %.list
-	@#printf "*** $* images generated ***\n"
+.PHONY: gdb
+gdb: $(OUTPUT_DIR)$(BINARY).gdb
 
-%.bin: %.elf
-	@#printf "  OBJCOPY $(*).bin\n"
-	$(Q)$(OBJCOPY) -Obinary $(*).elf $(*).bin
-
-%.hex: %.elf
-	@#printf "  OBJCOPY $(*).hex\n"
-	$(Q)$(OBJCOPY) -Oihex $(*).elf $(*).hex
-
-%.srec: %.elf
-	@#printf "  OBJCOPY $(*).srec\n"
-	$(Q)$(OBJCOPY) -Osrec $(*).elf $(*).srec
-
-%.list: %.elf
-	@#printf "  OBJDUMP $(*).list\n"
-	$(Q)$(OBJDUMP) -S $(*).elf > $(*).list
-
-bin/%.elf: $(OBJS) $(LDSCRIPT) $(SRCLIBDIR)/lib/libopencm3_stm32f4.a
-	@#printf "  LD      $(subst $(shell pwd)/,,$(@))\n"
-	$(Q)$(LD) -o bin/$(*).elf $(OBJS) -lopencm3_stm32f4 $(LDFLAGS)
-
-%.o: %.c Makefile
-	@#printf "  CC      $(subst $(shell pwd)/,,$(@))\n"
-	$(Q)$(CC) $(CFLAGS) -o $@ -c $<
-
+.PHONY: clean
 clean:
-	$(Q)rm -f src/*.d
-	$(Q)rm -f bin/*.elf
-	$(Q)rm -f bin/*.bin
-	$(Q)rm -f bin/*.hex
-	$(Q)rm -f bin/*.srec
-	$(Q)rm -f bin/*.list
-	$(Q)rm -f $(OBJS) $(GENFILES)
+	$(Q)$(RM) -rf $(OUTPUT_DIR) $(INTERMEDIATE_DIR)
 
-%.stlink-flash: bin/%.bin
-	@printf "  FLASH  $<\n"
-	$(Q)$(FLASH) write bin/$(*).bin 0x8000000
+%.images: %.elf %.list %.size
+	@# empty rule
 
+%.flash: %.elf
+	@$(PRINTF) "  GDB   $(*).elf (flash)\n"
+	$(Q)$(GDB) --batch -ex 'target extended-remote COM3' \
+		   -x $(OPENCM3_DIR)scripts/black_magic_probe_flash.scr \
+		   $<
 
-ifeq ($(BMP_PORT),)
-ifeq ($(OOCD_SERIAL),)
-%.flash: bin/%.hex
-	@printf "  FLASH   $<\n"
-	@# IMPORTANT: Don't use "resume", only "reset" will work correctly!
-	$(Q)$(OOCD) -f interface/$(OOCD_INTERFACE).cfg \
-		    -f board/$(OOCD_BOARD).cfg \
-		    -c "init" -c "reset init" \
-		    -c "stm32x mass_erase 0" \
-		    -c "flash write_image bin/$(*).hex" \
-		    -c "reset" \
-		    -c "shutdown" $(NULL)
-else
-%.flash: bin/%.hex
-	@printf "  FLASH   $<\n"
-	@# IMPORTANT: Don't use "resume", only "reset" will work correctly!
-	$(Q)$(OOCD) -f interface/$(OOCD_INTERFACE).cfg \
-		    -f board/$(OOCD_BOARD).cfg \
-		    -c "ft2232_serial $(OOCD_SERIAL)" \
-		    -c "init" -c "reset init" \
-		    -c "stm32x mass_erase 0" \
-		    -c "flash write_image bin/$(*).hex" \
-		    -c "reset" \
-		    -c "shutdown" $(NULL)
-endif
-else
-%.flash: bin/%.elf
-	@printf "  GDB   $(*).elf (flash)\n"
-	$(Q)$(GDB) --batch \
-		   -ex 'target extended-remote $(BMP_PORT)' \
-		   -x $(SRCLIBDIR)/scripts/black_magic_probe_flash.scr \
-		   bin/$(*).elf
-endif
+%.gdb: %.elf
+	@$(PRINTF) "  GDB   $(*).elf (flash)\n"
+	$(Q)$(GDB) -ex 'target extended-remote COM3' \
+		   -x $(OPENCM3_DIR)scripts/black_magic_probe_flash.scr \
+		   $<
 
-%.gdb: bin/%.elf
-	@printf "  GDB   $(*).elf (flash)\n"
-	$(Q)$(GDB) -ex 'target extended-remote $(BMP_PORT)' \
-		   -x $(SRCLIBDIR)/scripts/black_magic_probe_flash.scr \
-		   bin/$(*).elf
+###############################################################################
+# Directories
 
-.PHONY: images clean gdb
+$(OUTPUT_DIR):
+	@$(PRINTF) "  DIR     $@\n"
+	-@mkdir	$@
+
+$(INTERMEDIATE_DIR):
+	@$(PRINTF) "  DIR     $@\n"
+	-@mkdir	$@
+
+###############################################################################
+# DEPENDENCIES
 
 -include $(OBJS:.o=.d)

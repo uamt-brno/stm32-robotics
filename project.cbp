@@ -37,6 +37,8 @@
 				</MakeCommands>
 			</Target>
 		</Build>
+		<Unit filename="Makefile" />
+		<Unit filename="Makefile.include" />
 		<Unit filename="lib/libopencm3/include/libopencm3/cm3/assert.h" />
 		<Unit filename="lib/libopencm3/include/libopencm3/cm3/common.h" />
 		<Unit filename="lib/libopencm3/include/libopencm3/cm3/cortex.h" />
@@ -835,6 +837,11 @@
 		<Unit filename="lib/libopencm3/lib/usb/usb_standard.c">
 			<Option compilerVar="CC" />
 		</Unit>
+		<Unit filename="lib/libopencm3/mk/README" />
+		<Unit filename="lib/libopencm3/mk/gcc-config.mk" />
+		<Unit filename="lib/libopencm3/mk/gcc-rules.mk" />
+		<Unit filename="lib/libopencm3/mk/genlink-config.mk" />
+		<Unit filename="lib/libopencm3/mk/genlink-rules.mk" />
 		<Unit filename="lib/libopencm3/scripts/data/lpc43xx/adc.yaml" />
 		<Unit filename="lib/libopencm3/scripts/data/lpc43xx/atimer.yaml" />
 		<Unit filename="lib/libopencm3/scripts/data/lpc43xx/ccu.yaml" />
@@ -852,6 +859,8 @@
 		<Unit filename="lib/libopencm3/scripts/data/lpc43xx/sgpio.yaml" />
 		<Unit filename="lib/libopencm3/scripts/data/lpc43xx/ssp.yaml" />
 		<Unit filename="lib/libopencm3/scripts/data/lpc43xx/usb.yaml" />
+		<Unit filename="libopencm3-config.mk" />
+		<Unit filename="libopencm3-rules.mk" />
 		<Unit filename="src/main.c">
 			<Option compilerVar="CC" />
 		</Unit>
@@ -859,11 +868,11 @@
 			<code_completion />
 			<envvars />
 			<debugger>
-				<remote_debugging target="Debug">
-					<options conn_type="2" serial_port="COM3" serial_baud="115200" ip_address="localhost" ip_port="3333" additional_cmds="monitor connect_srst enable&#x0A;monitor swdp_scan&#x0A;attach 1&#x0A;load&#x0A;b main&#x0A;run" extended_remote="1" />
-				</remote_debugging>
 				<remote_debugging target="Release">
 					<options conn_type="2" serial_port="COM3" serial_baud="115200" ip_address="localhost" ip_port="3333" additional_cmds="monitor connect_srst enable&#x0A;monitor swdp_scan&#x0A;attach 1&#x0A;load&#x0A;run" extended_remote="1" />
+				</remote_debugging>
+				<remote_debugging target="Debug">
+					<options conn_type="2" serial_port="COM3" serial_baud="115200" ip_address="localhost" ip_port="3333" additional_cmds="monitor connect_srst enable&#x0A;monitor swdp_scan&#x0A;attach 1&#x0A;load&#x0A;b main&#x0A;run" extended_remote="1" />
 				</remote_debugging>
 			</debugger>
 			<lib_finder disable_auto="1" />

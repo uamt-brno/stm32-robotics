@@ -23,3 +23,5 @@
 /bin/*.srec
 /*.ld
 /*.layout
+*.map
+/tmp
