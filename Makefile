@@ -29,6 +29,8 @@ SRC_DIR		= src/
 
 #PRINTF	= scripts/fancyprint.sh
 
+CPPFLAGS	+= -Iinclude
+
 ###############################################################################
 # End of user config.
 
