@@ -37,7 +37,9 @@
 				</MakeCommands>
 			</Target>
 		</Build>
+		<Unit filename="LICENSE" />
 		<Unit filename="Makefile" />
+		<Unit filename="README.md" />
 		<Unit filename="include/main.h" />
 		<Unit filename="lib/libopencm3/include/libopencm3/cm3/assert.h" />
 		<Unit filename="lib/libopencm3/include/libopencm3/cm3/common.h" />
@@ -859,8 +861,9 @@
 		<Unit filename="lib/libopencm3/scripts/data/lpc43xx/sgpio.yaml" />
 		<Unit filename="lib/libopencm3/scripts/data/lpc43xx/ssp.yaml" />
 		<Unit filename="lib/libopencm3/scripts/data/lpc43xx/usb.yaml" />
-		<Unit filename="libopencm3-config.mk" />
-		<Unit filename="libopencm3-rules.mk" />
+		<Unit filename="mk/common.mk" />
+		<Unit filename="mk/libopencm3-config.mk" />
+		<Unit filename="mk/libopencm3-rules.mk" />
 		<Unit filename="scripts/fancyprint.sh" />
 		<Unit filename="src/main.c">
 			<Option compilerVar="CC" />
@@ -869,11 +872,11 @@
 			<code_completion />
 			<envvars />
 			<debugger>
-				<remote_debugging target="Release">
-					<options conn_type="2" serial_port="COM3" serial_baud="115200" ip_address="localhost" ip_port="3333" additional_cmds="monitor connect_srst enable&#x0A;monitor swdp_scan&#x0A;attach 1&#x0A;load&#x0A;run" extended_remote="1" />
-				</remote_debugging>
 				<remote_debugging target="Debug">
 					<options conn_type="2" serial_port="COM3" serial_baud="115200" ip_address="localhost" ip_port="3333" additional_cmds="monitor connect_srst enable&#x0A;monitor swdp_scan&#x0A;attach 1&#x0A;load&#x0A;b main&#x0A;run" extended_remote="1" />
+				</remote_debugging>
+				<remote_debugging target="Release">
+					<options conn_type="2" serial_port="COM3" serial_baud="115200" ip_address="localhost" ip_port="3333" additional_cmds="monitor connect_srst enable&#x0A;monitor swdp_scan&#x0A;attach 1&#x0A;load&#x0A;run" extended_remote="1" />
 				</remote_debugging>
 			</debugger>
 			<lib_finder disable_auto="1" />
