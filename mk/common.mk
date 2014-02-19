@@ -14,6 +14,7 @@ CFLAGS	+= -Wmissing-declarations -Wmissing-include-dirs -Wunreachable-code
 CXXFLAGS	+= -O0 -g
 CXXFLAGS	+= -Wextra -Wshadow -Wredundant-decls  -Weffc++
 CXXFLAGS	+= -fno-common -ffunction-sections -fdata-sections
+CXXFLAGS	+= -fno-exceptions -fno-unwind-tables
 
 ###############################################################################
 # C & C++ preprocessor common flags

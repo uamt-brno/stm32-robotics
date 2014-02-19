@@ -35,7 +35,7 @@ CPPFLAGS	+= -Iinclude
 # End of user config.
 
 # Append all sources in the src directory
-SRCS += $(patsubst $(SRC_DIR)%,%,$(wildcard $(SRC_DIR)*.c))
+SRCS += $(patsubst $(SRC_DIR)%,%,$(wildcard $(SRC_DIR)*.c) $(wildcard $(SRC_DIR)*.cpp))
 
 VPATH	+= src
 
@@ -53,7 +53,10 @@ endif
 ifeq ($(V),1)
 endif
 
-OBJS	:= $(addprefix $(INTERMEDIATE_DIR),$(SRCS:.c=.o) $(OBJS))
+OBJS	:= $(addprefix $(INTERMEDIATE_DIR),			\
+		$(patsubst %.c,%.o,$(filter %.c,$(SRCS)))	\
+		$(patsubst %.cpp,%.o,$(filter %.cpp,$(SRCS)))	\
+		$(OBJS))
 
 
 ###############################################################################
