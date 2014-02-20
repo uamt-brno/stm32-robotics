@@ -1,3 +1,6 @@
 [submodule "lib/libopencm3"]
 	path = lib/libopencm3
 	url = https://github.com/BuFran/libopencm3
+[submodule "lib/liboptl"]
+	path = lib/liboptl
+	url = https://github.com/BuFran/liboptl.git

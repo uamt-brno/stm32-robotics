@@ -861,22 +861,33 @@
 		<Unit filename="lib/libopencm3/scripts/data/lpc43xx/sgpio.yaml" />
 		<Unit filename="lib/libopencm3/scripts/data/lpc43xx/ssp.yaml" />
 		<Unit filename="lib/libopencm3/scripts/data/lpc43xx/usb.yaml" />
+		<Unit filename="lib/liboptl/LICENSE" />
+		<Unit filename="lib/liboptl/README.md" />
+		<Unit filename="lib/liboptl/include/optl/arch/cortexm/Delay.hpp" />
+		<Unit filename="lib/liboptl/include/optl/arch/stm32/Clock.hpp" />
+		<Unit filename="lib/liboptl/include/optl/arch/stm32/HwSerial_f0234l1.hpp" />
+		<Unit filename="lib/liboptl/include/optl/arch/stm32/PinAf_f0234l1.hpp" />
+		<Unit filename="lib/liboptl/include/optl/arch/stm32/Pin_f0234l1.hpp" />
+		<Unit filename="lib/liboptl/include/optl/console.hpp" />
+		<Unit filename="lib/liboptl/include/optl/optl.hpp" />
+		<Unit filename="lib/liboptl/include/optl/part/stm32f40x.hpp" />
+		<Unit filename="lib/liboptl/include/optl/stream.hpp" />
 		<Unit filename="mk/common.mk" />
 		<Unit filename="mk/libopencm3-config.mk" />
 		<Unit filename="mk/libopencm3-rules.mk" />
 		<Unit filename="scripts/fancyprint.sh" />
-		<Unit filename="src/main.c">
+		<Unit filename="src/main.cpp">
 			<Option compilerVar="CC" />
 		</Unit>
 		<Extensions>
 			<code_completion />
 			<envvars />
 			<debugger>
-				<remote_debugging target="Debug">
-					<options conn_type="2" serial_port="COM3" serial_baud="115200" ip_address="localhost" ip_port="3333" additional_cmds="monitor connect_srst enable&#x0A;monitor swdp_scan&#x0A;attach 1&#x0A;load&#x0A;b main&#x0A;run" extended_remote="1" />
-				</remote_debugging>
 				<remote_debugging target="Release">
 					<options conn_type="2" serial_port="COM3" serial_baud="115200" ip_address="localhost" ip_port="3333" additional_cmds="monitor connect_srst enable&#x0A;monitor swdp_scan&#x0A;attach 1&#x0A;load&#x0A;run" extended_remote="1" />
+				</remote_debugging>
+				<remote_debugging target="Debug">
+					<options conn_type="2" serial_port="COM3" serial_baud="115200" ip_address="localhost" ip_port="3333" additional_cmds="monitor connect_srst enable&#x0A;monitor swdp_scan&#x0A;attach 1&#x0A;load&#x0A;b main&#x0A;run" extended_remote="1" />
 				</remote_debugging>
 			</debugger>
 			<lib_finder disable_auto="1" />

@@ -23,6 +23,7 @@ DEVICE = stm32f407vgt6
 
 # Configure directories. These should end with trailing / !
 OPENCM3_DIR	= lib/libopencm3/
+OPTL_DIR	= lib/liboptl/
 INTERMEDIATE_DIR= tmp/
 OUTPUT_DIR	= bin/
 SRC_DIR		= src/
@@ -30,6 +31,7 @@ SRC_DIR		= src/
 #PRINTF	= scripts/fancyprint.sh
 
 CPPFLAGS	+= -Iinclude
+CPPFLAGS	+= -I$(OPTL_DIR)include
 
 ###############################################################################
 # End of user config.
